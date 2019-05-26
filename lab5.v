@@ -7,14 +7,7 @@ endmodule
 
 
 module ControlUNIT(input [5:0] primeros_seis,output RegDst,Branch,MemRead,MemtoReg,ALUOP,Memwrite,ALUSrc,RegWrite,Jump);
-//((primeros_seis==1)|(primeros_seis>=2)&(primeros_seis<=7)) =branches
-//primeros_seis==0  =R
-// primeros_seis>=8&primeros_seis<=14  = Inmediato (sin branches)
-//
-//
-//Duda: Jump suma o concatena?
-//
-//
+
 assign RegWrite= (primeros_seis==0)?1: //Instrucciones tipo R
 		 ((primeros_seis>=8)&(primeros_seis<=14)?1:0; //Inmediatos
 
