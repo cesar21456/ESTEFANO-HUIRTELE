@@ -1,11 +1,12 @@
-module InstructionMemory(input dir,output [31:0]salida);
-reg [7:0]memory [0:255];
+module InstructionMemory(input[31:0] dir,output [31:0]salida);
+reg [7:0]InstMemory [0:255];
 
 initial begin
-	$readmemh("instructions.txt",memory);
+	$readmemh("instructions.txt",InstMemory);
 end
 
-assign salida={memory[dir],memory[dir+1],memory[dir+2],memory[dir+3]};
+assign salida={InstMemory[dir],InstMemory[dir+1],InstMemory[dir+2],InstMemory[dir+3]};
+
 
 
 
