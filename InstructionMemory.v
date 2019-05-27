@@ -10,3 +10,7 @@ assign salida={memory[dir],memory[dir+1],memory[dir+2],memory[dir+3]};
 
 
 endmodule
+
+
+
+
