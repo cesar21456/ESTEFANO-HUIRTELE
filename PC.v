@@ -1,13 +1,19 @@
-module PC(input clk,input[31:0] pc,output[31:0] direccion,output reg pc1);
-always @(*)begin
-	if(pc1!=0)
-	begin
-		pc1=0;
-	end
-end
-assign direccion=(pc1==0)?0:pc;
+module PC(input clk,input[31:0] pcInput,output[31:0] direccion);
+reg[31:0] pc;
 initial
 begin
-	$strobe("PC is %b, and direccion is %b,pc1 is %b",pc,direccion,pc1);
+	pc=0;
+end
+
+always@(posedge clk)begin
+	pc=pc+4;
+	$display("Now pc is %b",pc);
+end
+
+assign direccion=pc;
+initial
+begin
+	$monitor("PC is %b, and direccion is %b",pc,direccion);
 end
 endmodule
+
