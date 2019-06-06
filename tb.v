@@ -19,13 +19,33 @@ alu ALU(read1,salida_mux,overflow,instruction[5:0],salida_alu);
 
 initial
 begin
-	pc=0;
-	clk=1;
-	
-
+        clk=0;
+        cont=0;
+        #10;
+        clk=1;
+        cont=1;
+        clk=0;
+        #10;
+        clk=1;
+        cont+=1;
+        clk=0;
 end
 initial
 begin
 	$monitor("Instruction is %b, Regwrite is %b, AluOP is %b",instruction,RegWrite,ALUOP);
 end
+	
+
+/*
+always
+begin
+      #10
+      clk <= 1;
+      #5
+      clk <= 0;
+end
+*/
+
+	
+	
 endmodule
