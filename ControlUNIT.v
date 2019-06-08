@@ -18,7 +18,7 @@ assign Jump= (primeros_seis==1|primeros_seis==2)?1:0; //Jump
 
 assign MemRead=(primeros_seis>=32 & primeros_seis<=38)?1:0; //Load word
 
-assign MemWrite=(primeros_seis>=38 & primeros_seis<=46)?1:0; //Store word
+assign MemWrite=(primeros_seis>=40 & primeros_seis<=46)?1:0; //Store word
 
 assign MemtoReg=(primeros_seis>=32 & primeros_seis<=38)?1:0; //Load word
 

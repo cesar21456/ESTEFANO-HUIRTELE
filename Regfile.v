@@ -9,12 +9,12 @@ initial
 begin
 	$readmemb("text.txt",memory);
 end
-        assign read1=(RegWrite==1)?memory[inA]:0;
-        assign read2=(RegWrite==1)?memory[inB]:0;
+        assign read1=(RegWrite)?memory[inA]:0;
+        assign read2=(RegWrite)?memory[inB]:0;
 	
 always@(negedge clk)
 begin
-	if(RegWrite==1)begin
+	if(RegWrite)begin
         memory[inC]=out;
 	$display("guardado en posicion %b la cadena %b (prueba: %b)", inC, out, memory[inC]);
 end

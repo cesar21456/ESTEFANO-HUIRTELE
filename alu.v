@@ -1,7 +1,7 @@
-module alu(read1,foutput,overflow,control,oc);
+module alu(read1,foutput,overflow,control,out);
 output reg overflow;
-output reg [31:0] oc;
-wire[31:0]out;
+reg [31:0] oc;
+output wire[31:0]out;
 input[5:0]control;
 input[31:0] foutput,read1;
 reg[31:0] memory[31:0];
@@ -20,6 +20,7 @@ assign out=(control==36)?read1&foutput:(
 			(control==16)?oc:(
 	   			(control==34)?read1-foutput:(
 	   				(control==42)?((read1<foutput)?1:0):     
-					(control==39)?~(read1|foutput):1   ))));
+					(control==39)?~(read1|foutput):oc))));
+	
 endmodule
 

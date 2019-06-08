@@ -1,8 +1,8 @@
-module PC(input clk,input[31:0] pcInput,output[31:0] direccion);
+module PC(input clk,output[31:0] direccion);
 reg[31:0] pc;
 initial
 begin
-	pc=0;
+	pc=-4;
 end
 
 always@(posedge clk)begin
