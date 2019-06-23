@@ -11,13 +11,13 @@ wire[31:0] salida_signextend,salida_mux;
 wire overflow;
 wire [31:0]READDATA;
 wire [31:0]salida_mux_2,salida_mux_1;
-
+wire [4:0]salida_mux_reg;
 PC programcounter(clk,dir);
 InstructionMemory test1(dir,instruction);
 ControlUNIT controlunit(instruction[31:26],RegDst,Branch,MemtoReg,Memwrite,ALUSrc,RegWrite,Jump, ALUOP,MemRead);
 mux MUX_JUMP(1,0,Jump,salida_mux_1);
-
-RegFile regfile(RegWrite,clk,instruction[25:21],instruction[20:16],instruction[15:11],read1,read2,salida_mux_2);
+mux_de_5 MUX_register(instruction[15:11],instruction[20:16],RegDst,salida_mux_reg);
+RegFile regfile(RegWrite,clk,instruction[25:21],instruction[20:16],salida_mux_reg[4:0],read1,read2,salida_mux_2);
 signextension SIGNEXTENSION(instruction[15:0],salida_signextend);
 mux MUX_REGISTER_MEMORY(salida_signextend,read2,ALUSrc,salida_mux);
 alucontrol ALUCONTROL(instruction[5:0],ALUOP,control);
