@@ -1,4 +1,4 @@
-endmodulemodule alu(read1,foutput,overflow,control,out,zero);
+module alu(read1,foutput,overflow,control,out,zero);
 output reg overflow;
 reg signed[31:0] oc ;
 output wire [31:0]out ;
