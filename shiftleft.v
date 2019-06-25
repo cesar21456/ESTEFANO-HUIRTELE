@@ -5,6 +5,6 @@ assign fjump=jumpi*4;
 
 always@(*)
 begin
-	$display("jumpi is %b fjump is %b",jumpi,fjump);
+	$display("sll:  jumpi is %b fjump is %b",jumpi,fjump);
 end
 endmodule

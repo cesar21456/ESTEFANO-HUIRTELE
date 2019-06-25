@@ -18,10 +18,11 @@ wire[31:0]salida_mux_2,salida_mux_1;
 wire[4:0]salida_mux_reg;
 	
 PC programcounter(clk,pc,dir);
+InstructionMemory test1(dir,instruction);
 PCAdder addition(pc,pcadded);
 jump jumper(fjump,Jump,pcadded,newdir);
 mux MUX_DIRECCION(newdir,pcadded,Jump,pcf);
-InstructionMemory test1(dir,instruction);
+shiftleft jumpshift(instruction[25:0],fjump);
 //ControlUNIT controlunit(instruction[31:26],RegDst,Branch,MemtoReg,Memwrite,ALUSrc,RegWrite,Jump, ALUOP,MemRead);
 RegFile regfile(RegWrite,clk,instruction[25:21],instruction[20:16],salida_mux_reg,read1,read2,salida_mux_2);
 mux MUX_JUMP(1,0,Jump,salida_mux_1);
@@ -48,19 +49,12 @@ begin
 	clk=1;
 	clk=~clk;
 	pc=pcf;
-	#10
-	clk=1;
-	clk=~clk;
-	pc=pcf;
-	#10
-	clk=1;
-	clk=~clk;
-	pc=pcf;
 
 end
-always@(*)
+always@(clk)
 begin
-	$monitor("Instruction is %b, Regwrite is %b, AluOP is %b",instruction,RegWrite,ALUOP);
-  	$display("Direccion is %b, con instruccion %b, pc is %b, pc added is %b",dir,instruction[31:26],pc,pcadded);
+	$display("%b",clk);
+	$monitor("tb:   Instruction is %b, Regwrite is %b, AluOP is %b, y 6 mas significativos son %b",instruction,RegWrite,ALUOP,instruction[31:26]);
+  	$display("tb:   Direccion is %b, con instruccion %b, pc is %b, pc added is %b",dir,instruction[31:26],pc,pcadded);
 end
 endmodule
