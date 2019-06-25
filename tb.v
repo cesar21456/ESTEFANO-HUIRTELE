@@ -23,7 +23,7 @@ PCAdder addition(pc,pcadded);
 jump jumper(fjump,Jump,pcadded,newdir);
 mux MUX_DIRECCION(newdir,pcadded,Jump,pcf);
 shiftleft jumpshift(instruction[25:0],fjump);
-//ControlUNIT controlunit(instruction[31:26],RegDst,Branch,MemtoReg,Memwrite,ALUSrc,RegWrite,Jump, ALUOP,MemRead);
+ControlUNIT controlunit(instruction[31:26],RegDst,Branch,MemtoReg,Memwrite,ALUSrc,RegWrite,Jump, ALUOP,MemRead);
 RegFile regfile(RegWrite,clk,instruction[25:21],instruction[20:16],salida_mux_reg,read1,read2,salida_mux_2);
 mux MUX_JUMP(1,0,Jump,salida_mux_1);
 mux_de_5 MUX_register(instruction[15:11],instruction[20:16],RegDst,salida_mux_reg);
