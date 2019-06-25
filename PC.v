@@ -1,19 +1,10 @@
-module PC(input clk,output[31:0] direccion);
-reg[31:0] pc;
-initial
-begin
-	pc=-4;
-end
-
-always@(posedge clk)begin
-	pc=pc+4;
-	$display("Now pc is %b",pc);
-end
+module PC(input clk,input[31:0] pc,output[31:0] direccion);
 
 assign direccion=pc;
-initial
+always@(clk)
 begin
-	$monitor("PC is %b, and direccion is %b",pc,direccion);
+        $display("Program counter: PC is %b, and direccion is %b ",pc,direccion);
+        $monitor("PC is %b, and direccion is %b",pc,direccion);
 end
 endmodule
 
