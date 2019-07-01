@@ -9,15 +9,15 @@ output wire zero;
 always @(*)
 begin
 	overflow=0;
-	if(control==16)
+	if(control==32|control==8)
 	begin
 		{overflow,oc}={1'b0,read1}+{1'b0,foutput};
 	end
 end
 
 assign out=(control==36|control==12)?read1&foutput:(
-	   	(control==35|control==13)?read1|foutput:(
-			(control==16|control==8)?oc:(
+	   	(control==37|control==13)?read1|foutput:(
+			(control==32|control==8)?oc:(
 	   			(control==34)?read1-foutput:(
 	   				(control==42|control==10)?((read1<foutput)?1:0):     
 					(control==39)?~(read1|foutput):0   ))));

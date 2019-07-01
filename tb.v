@@ -33,22 +33,12 @@ alucontrol ALUCONTROL(instruction[5:0],ALUOP,control);
 alu ALU(read1,salida_mux,overflow,control,salida_alu,zero);
 datamemory DATAMEMORY(Memwrite,salida_alu,read2,READDATA,MemRead);
 mux MUX_DATA_MEMORY(READDATA,salida_alu,MemtoReg,salida_mux_2);
+
 initial
 begin
-	pc=0;
-    
-end
-	
-initial
-begin
-	
+	pc=4;
 	clk=1;
-	clk=~clk;
-	pc=pcf;
-	#10
-	clk=1;
-	clk=~clk;
-	pc=pcf;
+	
 
 end
 always@(clk)
