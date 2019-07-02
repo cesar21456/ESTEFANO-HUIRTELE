@@ -14,7 +14,7 @@ always@(*)begin
 if (MemWrite)
 begin
 	DATA[Address]={16'b0,WriteData[15:0]};
-	$display("la data escrita en %b es WriteData %b y lo que se guardo fue %b",Address,WriteData,DATA[Address]);
+	$display("la data escrita en %b es WriteData %b y lo que se guardo fue %b",Address,WriteData[15:0],DATA[Address]);
 end
 end
 
