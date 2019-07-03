@@ -3,9 +3,9 @@ reg clk;
 reg[31:0] pc;
 wire[31:0] pcadded,newdir,pcf;
 wire[27:0] fjump;
-wire RegDst,Branch,MemtoReg,Memwrite,ALUSrc,RegWrite;
+wire RegDst,Branch,MemtoReg,ALUSrc,RegWrite;
 wire Jump=0;
-wire[1:0] MemRead;
+wire[1:0] MemRead,Memwrite;
 wire[6:0] ALUOP;
 wire[5:0] control;
 wire[31:0] instruction,dir;
@@ -16,14 +16,13 @@ wire overflow;
 wire[31:0]READDATA;
 wire[31:0]salida_mux_2,salida_mux_1;
 wire[4:0]salida_mux_reg;
-	
 PC programcounter(clk,pc,dir);
 InstructionMemory test1(dir,instruction);
 PCAdder addition(pc,pcadded);
 jump jumper(fjump,Jump,pcadded,newdir);
 mux MUX_DIRECCION(newdir,pcadded,Jump,pcf);
 shiftleft jumpshift(instruction[25:0],fjump);
-ControlUNIT controlunit(instruction[31:26],RegDst,Branch,MemtoReg,Memwrite,ALUSrc,RegWrite,Jump, ALUOP,MemRead);
+ControlUNIT controlunit(instruction[31:26],RegDst,Branch,MemtoReg,ALUSrc,RegWrite,Jump, ALUOP,Memwrite,MemRead);
 RegFile regfile(RegWrite,clk,instruction[25:21],instruction[20:16],salida_mux_reg,read1,read2,salida_mux_2);
 mux MUX_JUMP(1,0,Jump,salida_mux_1);
 mux_de_5 MUX_register(instruction[15:11],instruction[20:16],RegDst,salida_mux_reg);
@@ -31,15 +30,24 @@ signextension SIGNEXTENSION(instruction[15:0],salida_signextend);
 mux MUX_REGISTER_MEMORY(salida_signextend,read2,ALUSrc,salida_mux);
 alucontrol ALUCONTROL(instruction[5:0],ALUOP,control);
 alu ALU(read1,salida_mux,overflow,control,salida_alu,zero);
-datamemory DATAMEMORY(Memwrite,salida_alu,read2,READDATA,MemRead);
+datamemory DATAMEMORY(salida_alu,read2,READDATA,MemRead,Memwrite);
 mux MUX_DATA_MEMORY(READDATA,salida_alu,MemtoReg,salida_mux_2);
 
 initial
 begin
 	pc=4;
 	clk=1;
+	#10
+	clk=~clk;
+	clk=~clk;
 	
+	#10
+	clk=~clk;
+	clk=~clk;
 
+	#10
+	clk=~clk;
+	clk=~clk;
 end
 always@(clk)
 begin
