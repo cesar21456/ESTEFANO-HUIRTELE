@@ -24,5 +24,6 @@ assign out=(control==36|control==12)?read1&foutput:(
 					(control==39)?~(read1|foutput):0   ))));
 
 assign zero=(control==4&((read1-foutput)==0))?1:(
-	     (control==5&(read1-foutput)!=0)?1:0);
+	     (control==5&(read1-foutput)!=0)?1:(
+	     (control==1&(read1-foutput)>=0)?1:0));
 endmodule
