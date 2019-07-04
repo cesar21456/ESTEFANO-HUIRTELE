@@ -4,7 +4,7 @@ reg[31:0] pc;
 wire[31:0] pcadded,newdir,pcf;
 wire[27:0] fjump;
 wire RegDst,Branch,MemtoReg,ALUSrc,RegWrite;
-wire[1:0] Jump=0;
+wire[1:0] Jump;
 wire[1:0] MemRead,Memwrite;
 wire[6:0] ALUOP;
 wire[5:0] control;
@@ -36,20 +36,14 @@ mux MUX_DATA_MEMORY(READDATA,salida_alu,MemtoReg,salida_mux_2);
 
 initial
 begin
-	pc=4;
+	
 	clk=1;
-	#10
-	clk=~clk;
-	clk=~clk;
+	pc=4;
+	#100
+	clk=0;
+	#100
 	pc=pcf;
-	#10
-	clk=~clk;
-	clk=~clk;
-	pc=pcf;
-	#10
-	clk=~clk;
-	clk=~clk;
-	pc=pcf;
+	clk=1;
 end
 always@(clk)
 begin

@@ -4,7 +4,7 @@ output[31:0] pcadded;
 
 
 assign pcadded=pc+4;
-always@(pc) begin
+always@(*) begin
 	$display("Adder: pc is %b and pc added is %b",pc,pcadded);
 end
 

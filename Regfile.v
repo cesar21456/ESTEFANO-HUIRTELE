@@ -22,8 +22,16 @@ begin
         	memory[inC]=out;
 		$display("guardado en posicion %b la cadena %b (prueba: %b)", inC, out, memory[inC]);
 	end
-	if(Jump==3)
+	if(Jump==1)begin
 		memory[31]=pcf+4;
+		
+		end
+
 end
+
+always@(*)begin
+$display("linkeado a %b y guardado en el registro 31 con valor %b y el jump es %b", pcf+4,memory[31],Jump);
+end
+
 endmodule
 

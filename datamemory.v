@@ -12,15 +12,15 @@ assign ReadData=(MemRead==1)?{24'b0,DATA[Address][7:0]}:
 always@(*)begin
 if (MemWrite)
 begin
-	if(MemWrite==41)
+	if(MemWrite==2)
 		DATA[Address]={16'b0,WriteData[15:0]};
 	else
-		if(MemWrite==40)
+		if(MemWrite==1)
 			DATA[Address]={24'b0,WriteData[7:0]};
 		else
-			if(MemWrite==43)
+			if(MemWrite==3)
 				DATA[Address]=WriteData;
-			$display("la data escrita en %b es WriteData %b y lo que se guardo fue %b",Address,WriteData[15:0],DATA[Address]);
+			$display("la data escrita en %b es WriteData %b y lo que se guardo fue %b y MEMWRITE es %b",Address,WriteData,DATA[Address],MemWrite);
 end
 end
 

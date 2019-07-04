@@ -14,6 +14,6 @@ assign newdir=(Jump==1|Jump==3)?({pcadded[31:28],fjump}):(Jump==2)?jumpreg:pcadd
 
 always@(newdir)
 begin
-	$display("Jumper: Dir final es %b",newdir);
+	$display("Jumper: Dir final es %b y el JUMP es %b",newdir,Jump);
 end
 endmodule
