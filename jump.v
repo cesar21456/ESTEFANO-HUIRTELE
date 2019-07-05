@@ -1,19 +1,15 @@
 module jump(fjump,Jump,pcadded,newdir,jumpreg);
-input[31:0] pcadded,jumpreg;
-input[27:0] fjump;
+input[31:0] pcadded;
+input[27:0] fjump,jumpreg;
 input[1:0] Jump;
 wire[31:0] temp;
 output[31:0] newdir;
 assign temp=newdir;
-always@(fjump)
-begin
-	$display("Jump is %b, jumpreg is %b, pcadded is %b and temp is %b",Jump, jumpreg, pcadded, temp);
-end
-//assign newdir=(Jump==1)?({pcadded[31:28],fjump}):(Jump==2)?jumpreg:temp;
-assign newdir=(Jump==1|Jump==3)?({pcadded[31:28],fjump}):(Jump==2)?jumpreg:pcadded;
 
-always@(newdir)
-begin
-	$display("Jumper: Dir final es %b y el JUMP es %b",newdir,Jump);
+//assign newdir=(Jump==1)?({pcadded[31:28],fjump}):(Jump==2)?jumpreg:temp;
+assign newdir=(Jump==1|Jump==3)?({pcadded[31:28],fjump}):(Jump==2&fjump[7:2]==8)?({pcadded[31:28],jumpreg}):pcadded;
+always@(*)begin
+$display("fjump [7:2] es %b",fjump[7:2]);
 end
+
 endmodule

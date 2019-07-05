@@ -7,8 +7,6 @@ end
 
 assign salida={memory[dir-4],memory[dir-3],memory[dir-2],memory[dir-1]};
 
-always@(*)begin
-	$monitor("la salida del instruction memory es %b",salida);
-end 
+
 
 endmodule
